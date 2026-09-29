@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Ad | Marketing Strategy & Web Development Agency</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0d1d',
+                            navy: '#121833',
+                            card: '#1a2245',
+                            accent: '#6366f1',
+                            purple: '#8b5cf6',
+                            gold: '#fbbf24',
+                            pink: '#ec4899'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0d1d;
+            color: #f3f4f6;
+        }
+
+        .glass-panel {
+            background: rgba(26, 34, 69, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.3);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glow-effect:hover::after {
+            opacity: 0.6;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0d1d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+
+        .subpage-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .subpage-view.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-indigo-500/30">
+                        DA
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider text-white">DIGITAL <span
+                                class="text-indigo-400">AD</span></span>
+                        <span class="block text-[10px] tracking-widest text-gray-400 uppercase font-semibold">Growth
+                            Partners</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <button onclick="navigateTo('home')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Home</button>
+                    <button onclick="navigateTo('about')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">About
+                        Us</button>
+                    <button onclick="navigateTo('services')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Services</button>
+                    <button onclick="navigateTo('team')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Our
+                        Team</button>
+                    <button onclick="navigateTo('projects')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Projects</button>
+                    <button onclick="navigateTo('skills')"
+                        class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Skills</button>
+                </nav>
+
+                <!-- CTA & Mobile Button -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="navigateTo('contact')"
+                        class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5">
+                        Contact Us
+                    </button>
+                    <button id="mobile-menu-btn"
+                        class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden border-t border-gray-800 bg-brand-navy/95 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Home</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">About
+                Us</button>
+            <button onclick="navigateTo('services'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Services</button>
+            <button onclick="navigateTo('team'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Our
+                Team</button>
+            <button onclick="navigateTo('projects'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Projects</button>
+            <button onclick="navigateTo('skills'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Skills</button>
+            <button onclick="navigateTo('contact'); toggleMobileMenu()"
+                class="block w-full text-left px-3 py-2.5 rounded-md text-base font-semibold text-center text-white bg-indigo-600">Contact
+                Us</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="pt-24 flex-grow">
+
+        <!-- MAIN SPA VIEW (DEFAULT) -->
+        <div id="main-view">
+
+            <!-- Hero Section -->
+            <section id="home" class="relative py-2 lg:py-4 overflow-hidden">
+                <div
+                    class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 text-center lg:text-left">
+                            <div
+                                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-indigo-400 text-sm font-semibold mb-6 border border-indigo-500/30">
+                                <span class="flex h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span>
+                                Digital Marketing & Growth Specialists
+                            </div>
+                            <h1
+                                class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                                GROW YOUR COMPANY WITH <span
+                                    class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500">MARKETING
+                                    STRATEGIES</span> THAT WORK
+                            </h1>
+                            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                                We partner with you to drive business growth. We work as freelancers and collaborate
+                                with agencies, brands, and gaming companies worldwide to deliver high-impact digital
+                                experiences.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                                <button onclick="navigateTo('services')"
+                                    class="px-8 py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-xl shadow-indigo-500/25 transition-all transform hover:-translate-y-1">
+                                    Explore Services <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                                </button>
+                                <button onclick="navigateTo('projects')"
+                                    class="px-8 py-4 rounded-xl text-base font-bold text-gray-200 glass-card hover:bg-white/10 transition-all border border-gray-700">
+                                    View Projects
+                                </button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="relative w-full max-w-md">
+                                <div
+                                    class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500 to-pink-500 opacity-30 blur-xl">
+                                </div>
+                                <div
+                                    class="relative rounded-3xl overflow-hidden glass-panel p-3 border border-gray-700">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
+                                        alt="Sadhana - Growth Lead" class="rounded-2xl w-full h-[420px] object-cover"
+                                        onerror="this.src='https://placehold.co/600x800/1a2245/ffffff?text=Digital+Ad+Team'">
+                                    <div
+                                        class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-white/10">
+                                        <p class="text-white font-bold text-lg">Sadhana</p>
+                                        <p class="text-indigo-400 text-sm">Social Media Manager & Agency Founder</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Us Section -->
+            <section id="about" class="py-20 bg-brand-navy/40 relative border-y border-gray-800/60">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl mx-auto text-center mb-12">
+                        <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">INTRODUCTION</h2>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">We Drive Business Growth & Digital
+                            Transformation</h3>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="glass-card p-8 rounded-2xl border border-gray-800">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-2xl mb-6">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Flexible Collaboration</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                We work flexibly as dedicated freelancers or collaborate seamlessely with advertising
+                                agencies, corporate clients, and gaming enterprise teams.
+                            </p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl border border-gray-800">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-6">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Tailored Strategies</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                We provide complete end-to-end digital marketing, performance advertising, branding, and
+                                web development tailored to specific brand goals.
+                            </p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl border border-gray-800">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-pink-600/20 text-pink-400 flex items-center justify-center text-2xl mb-6">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">ROI Focused</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                From data-driven Meta & Google Ads campaigns to sleek high-converting web apps, every
+                                project is crafted to maximize user acquisition and conversions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">SERVICES OFFERED
+                        </h2>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Dive into Our Services</h3>
+                        <p class="text-gray-400 text-lg">Comprehensive digital solutions designed to elevate your brand
+                            performance across channels.</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                        <!-- Service Item Cards -->
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                <i class="fas fa-ad"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Digital Ad</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Social Media Marketing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-pink-600 group-hover:text-white transition-all">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Graphic Designing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <!-- <i class="fab fa-facebook"></i> -->
+
+                                <img src="path/to/meta-ads-icon.png" alt="Meta Ads" class="w-6 h-6">
+                            </div>
+                            <h4 class="font-bold text-white text-base">Meta Ads</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition-all">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Content Marketing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Google Ads</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-cyan-600 group-hover:text-white transition-all">
+                                <i class="fas fa-search font-bold"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">SEO Optimization</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-rose-600 group-hover:text-white transition-all">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">GMB Page</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-teal-600 group-hover:text-white transition-all">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Email Marketing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-red-600 group-hover:text-white transition-all">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Video Editing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Full Stack Developer</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-fuchsia-500/10 text-fuchsia-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-fuchsia-600 group-hover:text-white transition-all">
+                                <i class="fas fa-users font-bold"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Influencers Marketing</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-600 group-hover:text-white transition-all">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">AI Tools Experts</h4>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl text-center group hover:border-indigo-500/50">
+                            <div
+                                class="w-12 h-12 mx-auto rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-2xl mb-4 group-hover:bg-violet-600 group-hover:text-white transition-all">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Apps Designing</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Team Section -->
+            <section id="team" class="py-24 bg-brand-navy/30 relative border-t border-gray-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">THE TALENT</h2>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Meet Our Team</h3>
+                        <p class="text-gray-400 text-lg">Skilled professionals driving creative, strategic, and
+                            technical excellence.</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Sadhana -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-indigo-500 to-pink-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-user-tie text-3xl text-indigo-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Sadhana</h4>
+                            <p class="text-indigo-400 text-sm font-medium mt-1">Social Media Manager</p>
+                        </div>
+
+                        <!-- Niraj -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-purple-500 to-indigo-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-pen-nib text-3xl text-purple-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Niraj</h4>
+                            <p class="text-purple-400 text-sm font-medium mt-1">Content Writer</p>
+                        </div>
+
+                        <!-- Omkar -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-pink-500 to-red-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-chart-bar text-3xl text-pink-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Omkar</h4>
+                            <p class="text-pink-400 text-sm font-medium mt-1">Performance Marketer</p>
+                        </div>
+
+                        <!-- Meet -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-red-500 to-amber-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-film text-3xl text-amber-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Meet</h4>
+                            <p class="text-amber-400 text-sm font-medium mt-1">Video Editor</p>
+                        </div>
+
+                        <!-- Raj -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-blue-500 to-cyan-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-code text-3xl text-cyan-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Raj</h4>
+                            <p class="text-cyan-400 text-sm font-medium mt-1">Website Developer</p>
+                        </div>
+
+                        <!-- Seema -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-emerald-500 to-teal-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-layer-group text-3xl text-emerald-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Seema</h4>
+                            <p class="text-emerald-400 text-sm font-medium mt-1">Full Stack Developer</p>
+                        </div>
+
+                        <!-- Shivani -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-violet-500 to-fuchsia-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-vial text-3xl text-violet-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Shivani</h4>
+                            <p class="text-violet-400 text-sm font-medium mt-1">Software Tester</p>
+                        </div>
+
+                        <!-- Ali -->
+                        <div
+                            class="glass-card rounded-2xl p-6 text-center border border-gray-800 hover:border-indigo-500/50">
+                            <div
+                                class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-yellow-500 to-orange-500 mb-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-brand-navy flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-paint-brush text-3xl text-yellow-400"></i>
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white">Ali</h4>
+                            <p class="text-yellow-400 text-sm font-medium mt-1">Graphic Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects & Brands Section -->
+            <section id="projects" class="py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <!-- Section Heading -->
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">MY PROJECTS &
+                            PORTFOLIO</h2>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Brands We Work With</h3>
+                        <p class="text-gray-400 text-lg">Click on any project category to open detailed showcase
+                            galleries and client work.</p>
+                    </div>
+
+                    <!-- Interactive Brand Frames Grid -->
+                    <div class="mb-20">
+                        <div class="flex justify-between items-center mb-8">
+                            <h4 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i class="fas fa-award text-indigo-400"></i> Client Brand Partners
+                            </h4>
+                            <span class="text-sm text-gray-400">Image Frames View</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                            <!-- Brand Frame 1 -->
+                            <a href="https://silvercoinatta.in/" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-amber-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl font-black mb-3 border border-amber-500/20 group-hover:scale-110 transition-transform">
+                                    <!-- <i class="fas fa-coins"></i> -->
+                                     <img src="Brands/Sliver Coin.png" alt="">
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Silver Coin</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Branding & Marketing</span>
+                            </a>
+
+                            <!-- Brand Frame 2 -->
+                            <a href="https://royalzuricasino.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-purple-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl font-black mb-3 border border-purple-500/20 group-hover:scale-110 transition-transform">
+                                    <!-- <i class="fas fa-crown"></i>  -->
+                                     <img src="Brands/Royal Zuri.png" alt="">
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Royal Casino</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Digital Advertising</span>
+                            </a>
+
+                            <!-- Brand Frame 3 -->
+                            <a href="https://donergyros.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-red-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-2xl font-black mb-3 border border-red-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Döner Gyros</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Social Media Ads</span>
+                            </a>
+
+                            <!-- Brand Frame 4 -->
+                            <a href="https://grandwinn.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-indigo-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl font-black mb-3 border border-indigo-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Grand Winn</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Gaming Promotion</span>
+                            </a>
+
+                            <!-- Brand Frame 5 -->
+                            <a href="https://chaska.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-pink-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl font-black mb-3 border border-pink-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-pepper-hot"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Chaska</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Content Strategy</span>
+                            </a>
+
+                            <!-- Brand Frame 6 -->
+                            <a href="https://8bits.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-blue-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl font-black mb-3 border border-blue-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">8 Bits</span>
+                        
+                                <span class="text-[11px] text-gray-500 mt-1">App & Logo Design</span>
+                            </a>
+
+                            <!-- Brand Frame 7 -->
+                            <a href="https://bytewise.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-cyan-400/50" target="_blank">
+                               
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl font-black mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h5 class="font-bold text-white text-lg">Bytewise IT</h5>
+                    <p class="text-xs text-gray-400 mt-1">Corporate Software Brand</p>
+               
+                            </a>
+
+                            <!-- Brand Frame 8 -->
+                            <a href="https://csdigital.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-emerald-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl font-black mb-3 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">CS Digital Solution</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Full Service Marketing</span>
+                            </a>
+
+                            <!-- Brand Frame 9 -->
+                            <a href="https://jaydada.example.com" class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-800 group hover:border-orange-400/50" target="_blank">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-2xl font-black mb-3 border border-orange-500/20 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-drumstick-bite"></i>
+                                </div>
+                                <span class="text-sm font-bold text-gray-200">Jay Dada Wagh Thali</span>
+                                <span class="text-[11px] text-gray-500 mt-1">Social Branding</span>
+                            </a>
+
+                            <!-- Brand Frame 10: See All Brands Icon -->
+                            <div onclick="openSubpage('web-dev')"
+                                class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center border-2 border-dashed border-indigo-500/50 group hover:bg-indigo-600/10 cursor-pointer">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl font-black mb-3 shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </div>
+                                <span class="text-sm font-bold text-indigo-400 group-hover:text-white">See All
+                                    Websites</span>
+                                <span class="text-[11px] text-gray-400 mt-1">& Interactive Apps</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Sub-Page Selector Cards -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-white mb-8 text-center sm:text-left">
+                            Explore Project Sub-Pages
+                        </h4>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Card 1: Content Ideas & Creative Designs -->
+                            <div onclick="openSubpage('content-creative')"
+                                class="glass-card rounded-3xl p-8 cursor-pointer group hover:border-indigo-500 transition-all">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h5 class="text-2xl font-bold text-white mb-3">Content Ideas & Creative Designs</h5>
+                                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                    View graphics, ad creatives, social media carousel posts, and promotional poster
+                                    concepts built for client growth.
+                                </p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-indigo-400 group-hover:text-indigo-300">
+                                    Open Sub-Page <i
+                                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                            </div>
+
+                            <!-- Card 2: Video Editing Links -->
+                            <div onclick="openSubpage('video-editing')"
+                                class="glass-card rounded-3xl p-8 cursor-pointer group hover:border-red-500 transition-all">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-red-600/20 text-red-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <h5 class="text-2xl font-bold text-white mb-3">Video Editing Showcase</h5>
+                                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                    Explore video edits, Instagram Reels, promo commercial clips, and video campaign
+                                    previews.
+                                </p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-red-400 group-hover:text-red-300">
+                                    Open Sub-Page <i
+                                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                            </div>
+
+                            <!-- Card 3: Influencer Marketing -->
+                            <div onclick="openSubpage('influencer')"
+                                class="glass-card rounded-3xl p-8 cursor-pointer group hover:border-pink-500 transition-all">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-pink-600/20 text-pink-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-pink-600 group-hover:text-white transition-all">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <h5 class="text-2xl font-bold text-white mb-3">Influencer Marketing</h5>
+                                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                    Discover influencer collabs, reach metrics, sponsored social campaigns, and brand
+                                    engagement statistics.
+                                </p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-pink-400 group-hover:text-pink-300">
+                                    Open Sub-Page <i
+                                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                            </div>
+
+                            <!-- Card 4: Logo Designing -->
+                            <div onclick="openSubpage('logo-design')"
+                                class="glass-card rounded-3xl p-8 cursor-pointer group hover:border-purple-500 transition-all">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                                    <i class="fas fa-pen-tool"></i>
+                                </div>
+                                <h5 class="text-2xl font-bold text-white mb-3">Logo Designing</h5>
+                                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                    Examine vector brand logos, typography identity guidelines, and frame mocks created
+                                    for client brands.
+                                </p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-purple-400 group-hover:text-purple-300">
+                                    Open Sub-Page <i
+                                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                            </div>
+
+                            <!-- Card 5: Website & App Development -->
+                            <div onclick="openSubpage('web-dev')"
+                                class="glass-card rounded-3xl p-8 cursor-pointer group hover:border-emerald-500 transition-all">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h5 class="text-2xl font-bold text-white mb-3">Website & Apps Developed</h5>
+                                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                    Live website links, web app designs, and gaming platform portals designed and
+                                    engineered by us.
+                                </p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-emerald-400 group-hover:text-emerald-300">
+                                    Open Sub-Page <i
+                                        class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-20 bg-brand-navy/40 border-t border-gray-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">TECHNICAL
+                            PROFICIENCY</h2>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Our Core Competencies</h3>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-10">
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-6">
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">Digital Marketing & Meta/Google Ads</span>
+                                    <span class="text-indigo-400">95%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+                                        style="width: 95%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">Social Media Management & Content Strategy</span>
+                                    <span class="text-purple-400">92%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                                        style="width: 92%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">Full Stack Web & App Development</span>
+                                    <span class="text-emerald-400">90%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full"
+                                        style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-6">
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">Graphic Design & Logo Branding</span>
+                                    <span class="text-pink-400">94%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-pink-500 to-rose-500 rounded-full"
+                                        style="width: 94%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">Video Editing & Motion Graphics</span>
+                                    <span class="text-amber-400">88%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"
+                                        style="width: 88%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between font-bold mb-2">
+                                    <span class="text-gray-200">AI Marketing Tools & Automation</span>
+                                    <span class="text-sky-400">96%</span>
+                                </div>
+                                <div class="w-full h-3 rounded-full bg-gray-800 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-sky-500 to-blue-500 rounded-full"
+                                        style="width: 96%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-24 relative">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div
+                        class="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-700 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl"></div>
+
+                        <div class="text-center mb-10">
+                            <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Let's Take Your Brand to the
+                                Next Level.</h2>
+                            <p class="text-gray-300">Ready to scale your business? Send us a message and our team will
+                                respond within 24 hours.</p>
+                        </div>
+
+                        <!-- Form -->
+                        <form id="portfolio-contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Your
+                                        Name</label>
+                                    <input type="text" required placeholder="John Doe"
+                                        class="w-full px-4 py-3 rounded-xl bg-brand-navy/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Email
+                                        Address</label>
+                                    <input type="email" required placeholder="john@example.com"
+                                        class="w-full px-4 py-3 rounded-xl bg-brand-navy/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Service
+                                    Needed</label>
+                                <select
+                                    class="w-full px-4 py-3 rounded-xl bg-brand-navy/80 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 transition-all">
+                                    <option class="bg-brand-navy">Digital Advertising & Meta Ads</option>
+                                    <option class="bg-brand-navy">Social Media Marketing</option>
+                                    <option class="bg-brand-navy">Content Ideas & Graphic Design</option>
+                                    <option class="bg-brand-navy">Video Editing & Reels</option>
+                                    <option class="bg-brand-navy">Website & App Development</option>
+                                    <option class="bg-brand-navy">Influencer Marketing Campaign</option>
+                                    <option class="bg-brand-navy">Logo Designing</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Message</label>
+                                <textarea rows="4" required
+                                    placeholder="Tell us about your project or marketing goals..."
+                                    class="w-full px-4 py-3 rounded-xl bg-brand-navy/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-all"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 shadow-xl shadow-indigo-500/30 transition-all">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+
+                        <div id="form-success-msg"
+                            class="hidden mt-6 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 text-center font-semibold">
+                            <i class="fas fa-check-circle text-xl mr-2"></i> Thank you! Your message has been sent
+                            successfully. We will be in touch shortly!
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!-- SUB-PAGE 1: CONTENT IDEAS & CREATIVE DESIGNS -->
+        <div id="subpage-content-creative" class="subpage-view max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Bar -->
+            <button onclick="closeSubpage()"
+                class="mb-8 inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white glass-panel hover:bg-white/10 transition-all">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Main Portfolio
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-2">PROJECT SHOWCASE SUB-PAGE
+                </h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Content Ideas & Creative Designs</h3>
+                <p class="text-gray-400 mt-2">Explore ad creatives, social media posts, promotional graphics, and
+                    content strategies.</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600"
+                        alt="Creative Campaign Poster" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Social Ad
+                            Campaign</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-2">Digital Marketing Ad Creative</h4>
+                        <p class="text-gray-400 text-sm">High-converting social banner graphics designed for performance
+                            ads.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&q=80&w=600"
+                        alt="Brand Content Strategy" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Content Strategy</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-2">Brand Carousel Graphics</h4>
+                        <p class="text-gray-400 text-sm">Educational and engagement focused content posts for Instagram
+                            & LinkedIn.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=600"
+                        alt="Creative Design Concept" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Gaming &
+                            Entertainment</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-2">Casino & Gaming Banners</h4>
+                        <p class="text-gray-400 text-sm">Vibrant visual promos for Royal Casino and Grand Winn
+                            campaigns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SUB-PAGE 2: VIDEO EDITING LINKS -->
+        <div id="subpage-video-editing" class="subpage-view max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <button onclick="closeSubpage()"
+                class="mb-8 inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white glass-panel hover:bg-white/10 transition-all">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Main Portfolio
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-red-400 font-bold mb-2">PROJECT SHOWCASE SUB-PAGE</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Video Editing & Reels Showcase</h3>
+                <p class="text-gray-400 mt-2">Commercial video edits, short-form reels, motion graphics, and marketing
+                    promo clips.</p>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video Card 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-800 group">
+                    <div class="relative h-64 bg-slate-900 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=600"
+                            alt="Video Reel Preview"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div
+                                class="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg shadow-red-600/50 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Instagram Reel /
+                            Shorts</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-2">High-Paced Product Promo Reel</h4>
+                        <p class="text-gray-400 text-sm mb-4">Engaging cuts, custom motion graphics, sound design, and
+                            color grading.</p>
+                        <a href="https://youtube.com" target="_blank"
+                            class="inline-flex items-center text-xs font-bold text-red-400 hover:text-red-300">
+                            Watch Video Link <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-800 group">
+                    <div class="relative h-64 bg-slate-900 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=600"
+                            alt="Video Edit Showcase"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div
+                                class="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg shadow-red-600/50 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Brand Commercial</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-2">Döner Gyros Brand Video</h4>
+                        <p class="text-gray-400 text-sm mb-4">Appetizing food commercial edits with cinematic
+                            transitions and voiceover sync.</p>
+                        <a href="https://youtube.com" target="_blank"
+                            class="inline-flex items-center text-xs font-bold text-red-400 hover:text-red-300">
+                            Watch Video Link <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SUB-PAGE 3: INFLUENCER MARKETING -->
+        <div id="subpage-influencer" class="subpage-view max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <button onclick="closeSubpage()"
+                class="mb-8 inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white glass-panel hover:bg-white/10 transition-all">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Main Portfolio
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-pink-400 font-bold mb-2">PROJECT SHOWCASE SUB-PAGE
+                </h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Influencer Marketing Campaigns</h3>
+                <p class="text-gray-400 mt-2">Creator tie-ups, reach analytics, video collabs, and sponsored growth
+                    campaigns.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <div class="glass-card p-6 rounded-2xl border border-pink-500/20 text-center">
+                    <p class="text-4xl font-black text-pink-400 mb-1">2.5M+</p>
+                    <p class="text-gray-300 font-medium text-sm">Total Campaign Impressions</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-pink-500/20 text-center">
+                    <p class="text-4xl font-black text-purple-400 mb-1">50+</p>
+                    <p class="text-gray-300 font-medium text-sm">Influencers Onboarded</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-pink-500/20 text-center">
+                    <p class="text-4xl font-black text-indigo-400 mb-1">8.4%</p>
+                    <p class="text-gray-300 font-medium text-sm">Avg. Engagement Rate</p>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-2xl border border-gray-800">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Gaming App Launch Collab</h4>
+                            <p class="text-xs text-gray-400">Grand Winn & Royal Casino</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Partnered with top lifestyle and gaming creators to drive high-converting app downloads and user
+                        signups across Instagram and YouTube.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl border border-gray-800">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Food Influencer Drive</h4>
+                            <p class="text-xs text-gray-400">Döner Gyros & Jay Dada Wagh Thali</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Organized local food vlogger visits and reel reviews, resulting in a 40% increase in weekend
+                        restaurant footfall and online orders.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SUB-PAGE 4: LOGO DESIGNING -->
+        <div id="subpage-logo-design" class="subpage-view max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <button onclick="closeSubpage()"
+                class="mb-8 inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white glass-panel hover:bg-white/10 transition-all">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Main Portfolio
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-purple-400 font-bold mb-2">PROJECT SHOWCASE SUB-PAGE
+                </h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Logo & Brand Identity Designs</h3>
+                <p class="text-gray-400 mt-2">Vector logo marks, brand visual guidelines, and modern identity systems.
+                </p>
+            </div>
+
+            <!-- Logo Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <a href="https://silvercoinatta.in/">
+                    <div
+                        class="glass-card p-8 rounded-2xl text-center border border-gray-800 flex flex-col items-center justify-center">
+
+                        <div
+                            class="w-20 h-20 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center justify-center text-3xl font-black mb-4">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h5 class="font-bold text-white text-lg">Silver Coin</h5>
+                        <p class="text-xs text-gray-400 mt-1">Monogram Brand Identity</p>
+
+                    </div>
+                </a>
+                <a href="https://royalzuricasino.com">
+                    <div
+                    class="glass-card p-8 rounded-2xl text-center border border-gray-800 flex flex-col items-center justify-center">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center justify-center text-3xl font-black mb-4">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h5 class="font-bold text-white text-lg">Royal Casino</h5>
+                    <p class="text-xs text-gray-400 mt-1">Luxury Crest Logo Design</p>
+                </div>
+                </a>
+
+                <div
+                    class="glass-card p-8 rounded-2xl text-center border border-gray-800 flex flex-col items-center justify-center">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center justify-center text-3xl font-black mb-4">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h5 class="font-bold text-white text-lg">8 Bits</h5>
+                    <p class="text-xs text-gray-400 mt-1">Pixel Tech Insignia</p>
+                </div>
+
+                <div
+                    class="glass-card p-8 rounded-2xl text-center border border-gray-800 flex flex-col items-center justify-center">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl font-black mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h5 class="font-bold text-white text-lg">Bytewise IT</h5>
+                    <p class="text-xs text-gray-400 mt-1">Corporate Software Brand</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SUB-PAGE 5: WEBSITE & APP DEVELOPMENT -->
+        <div id="subpage-web-dev" class="subpage-view max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <button onclick="closeSubpage()"
+                class="mb-8 inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white glass-panel hover:bg-white/10 transition-all">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Main Portfolio
+            </button>
+
+            <div class="mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2">PROJECT SHOWCASE SUB-PAGE
+                </h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Websites & Apps Designed & Developed By Us
+                </h3>
+                <p class="text-gray-400 mt-2">Interactive web platforms, live customer portals, and full-stack web
+                    applications.</p>
+            </div>
+
+            <!-- Web Links Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Site 1 -->
+                <div
+                    class="glass-card rounded-2xl overflow-hidden border border-gray-800 flex flex-col justify-between p-6">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Grand 7 Casino Goa</h4>
+                        <p class="text-gray-400 text-sm mb-6">Interactive online casino web portal with live updates,
+                            table booking system, and dynamic promos.</p>
+                    </div>
+                    <a href="https://grand7casinogoa.co" target="_blank"
+                        class="inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-all text-sm">
+                        Visit Live Website <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Site 2 -->
+                <div
+                    class="glass-card rounded-2xl overflow-hidden border border-gray-800 flex flex-col justify-between p-6">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Shubhalaxmi Lottery</h4>
+                        <p class="text-gray-400 text-sm mb-6">Full stack lottery draw application with live results
+                            checker, user registration, and secure portal.</p>
+                    </div>
+                    <a href="https://shubhalaxmilottery.co" target="_blank"
+                        class="inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-all text-sm">
+                        Visit Live Website <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Site 3 -->
+                <div
+                    class="glass-card rounded-2xl overflow-hidden border border-gray-800 flex flex-col justify-between p-6">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">CS Digital Solution</h4>
+                        <p class="text-gray-400 text-sm mb-6">Modern corporate website for tech solutions agency,
+                            featuring interactive service catalog.</p>
+                    </div>
+                    <a href="#" onclick="alert('Website link preview requested.'); return false;"
+                        class="inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold text-white bg-purple-600 hover:bg-purple-500 transition-all text-sm">
+                        Visit Site Preview <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-brand-navy py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white">
+                        DA
+                    </div>
+                    <span class="text-lg font-extrabold text-white">DIGITAL <span
+                            class="text-indigo-400">AD</span></span>
+                </div>
+
+                <p class="text-sm text-gray-400 text-center">
+                    © 2026 Digital Ad. All rights reserved. Built for agency & client growth.
+                </p>
+
+                <div class="flex space-x-4 text-gray-400">
+                    <a href="#" class="hover:text-indigo-400 transition-colors"><i
+                            class="fab fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-indigo-400 transition-colors"><i
+                            class="fab fa-facebook text-lg"></i></a>
+                    <a href="#" class="hover:text-indigo-400 transition-colors"><i
+                            class="fab fa-linkedin text-lg"></i></a>
+                    <a href="#" class="hover:text-indigo-400 transition-colors"><i
+                            class="fab fa-youtube text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // SPA Navigation Routing
+        function navigateTo(sectionId) {
+            closeSubpage();
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Sub-page Opening / Routing Logic
+        function openSubpage(subpageKey) {
+            // Hide main view
+            document.getElementById('main-view').style.display = 'none';
+
+            // Hide all subpages first
+            const subpages = document.querySelectorAll('.subpage-view');
+            subpages.forEach(sp => sp.classList.remove('active'));
+
+            // Show target subpage
+            const target = document.getElementById(`subpage-${subpageKey}`);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Back button function to return to main portfolio
+        function closeSubpage() {
+            const subpages = document.querySelectorAll('.subpage-view');
+            subpages.forEach(sp => sp.classList.remove('active'));
+
+            document.getElementById('main-view').style.display = 'block';
+        }
+
+        // Contact Form Handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successMsg = document.getElementById('form-success-msg');
+            const form = document.getElementById('portfolio-contact-form');
+
+            successMsg.classList.remove('hidden');
+            form.reset();
+
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
+</body>
+
+</html>
